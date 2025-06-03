@@ -5,15 +5,15 @@ using UnityEngine;
 public class PropertyEditorWindow : EditorWindow
 {
     public static void DrawSerializedObject(SerializedObject so, bool skipStart) {
-        var props = so.GetIterator();
+        var prop = so.GetIterator();
         if (skipStart) {
-            props.NextVisible(enterChildren: true);
+            prop.NextVisible(enterChildren: true);
         } else {
-            props.Next(enterChildren: true);
+            prop.Next(enterChildren: true);
         }
         do {
-            EditorGUILayout.PropertyField(props, includeChildren: true);
-        } while (props.Next(enterChildren: false));
+            EditorGUILayout.PropertyField(prop, includeChildren: true);
+        } while (prop.Next(enterChildren: false));
     }
 
     public void OnEnable()
