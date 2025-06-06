@@ -117,7 +117,7 @@ public class MaterialPropertyCopier : PropertyEditorWindow
 
         srcScrollPos = EditorGUILayout.BeginScrollView(srcScrollPos);
         if (srcSerialized != null) {
-            DrawSerializedObject(srcSerialized, true);
+            DrawSerializedObject(srcSerialized, skipStart: true, showHidden: true);
         }
         EditorGUILayout.EndScrollView();
 
@@ -147,7 +147,7 @@ public class MaterialPropertyCopier : PropertyEditorWindow
 
         tgtScrollPos = EditorGUILayout.BeginScrollView(tgtScrollPos);
         if (tgtSerialized != null) {
-            DrawSerializedObject(tgtSerialized, true);
+            DrawSerializedObject(tgtSerialized, skipStart: true, showHidden: true);
         }
         EditorGUILayout.EndScrollView();
 

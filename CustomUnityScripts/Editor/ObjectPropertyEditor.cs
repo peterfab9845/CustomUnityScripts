@@ -42,7 +42,7 @@ public class ObjectPropertyEditor : PropertyEditorWindow
 
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         if (so != null) {
-            DrawSerializedObject(so, false);
+            DrawSerializedObject(so, skipStart: false, showHidden: true);
         }
         EditorGUILayout.EndScrollView();
     }
