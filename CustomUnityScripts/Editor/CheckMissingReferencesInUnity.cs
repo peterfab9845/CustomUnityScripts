@@ -49,7 +49,7 @@ public static class CheckMissingReferences
                 var so = new SerializedObject(c);
                 var sp = so.GetIterator();
 
-                while (sp.NextVisible(true))
+                while (sp.Next(true))
                 {
                     if (sp.propertyType == SerializedPropertyType.ObjectReference)
                     {
@@ -104,7 +104,7 @@ public static class CheckMissingReferences
             var so = new SerializedObject(ac);
             var sp = so.GetIterator();
 
-            while (sp.NextVisible (true)) {
+            while (sp.Next(true)) {
                 if (sp.propertyType == SerializedPropertyType.ObjectReference) {
                     if (sp.objectReferenceValue == null && sp.objectReferenceInstanceIDValue != 0) {
                         Debug.LogError($"Missing reference: Scene=({sceneName}) Animator=({FullObjectPath(animator.gameObject)}) Clip=({ac.name}) tries to animate an object reference to a missing object. Try turning on preview and looking for missing. Maybe helpful junk: PropertyPath=({sp.propertyPath}) DisplayName=({sp.displayName})", animator);

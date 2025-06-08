@@ -268,10 +268,10 @@ public class MaterialPropertyCopier : PropertyEditorWindow
         if (src.propertyType == SerializedPropertyType.Generic && src.type == "UnityTexEnv") {
             SerializedProperty iterator = src.Copy();
             SerializedProperty end = iterator.GetEndProperty();
-            iterator.NextVisible(enterChildren: true); // get into the children of the current property
+            iterator.Next(enterChildren: true); // get into the children of the current property
             do {
                 CopySerializedProperty(iterator, tgt.FindPropertyRelative(iterator.name));
-            } while (iterator.NextVisible(enterChildren: false) && !SerializedProperty.EqualContents(iterator, end));
+            } while (iterator.Next(enterChildren: false) && !SerializedProperty.EqualContents(iterator, end));
         } else {
             tgt.boxedValue = src.boxedValue;
         }
