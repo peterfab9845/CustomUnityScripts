@@ -1,6 +1,4 @@
 // Based on http://www.tallior.com/find-missing-references-unity/
-// It fixes deprecations and checks for missing references every time a new scene is loaded
-// Moreover, it inspects missing references in animators and animation frames
 
 // Put this script in Assets/Editor/ so it doesn't get built with the project!
 
@@ -8,24 +6,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using System.Linq;
-
-//[InitializeOnLoad]
-//public static class LatestScenes
-//{
-//    static string currentScene;
-//    static LatestScenes()
-//    {
-//        EditorApplication.hierarchyChanged += hierarchyChanged;
-//    }
-//    static void hierarchyChanged()
-//    {
-//        if (currentScene != EditorSceneManager.GetActiveScene().name)
-//        {
-//            CheckMissingReferences.FindMissingReferencesInCurrentScene();
-//            currentScene = EditorSceneManager.GetActiveScene().name;
-//        }
-//    }
-//}
 
 public static class CheckMissingReferences
 {
@@ -37,7 +17,7 @@ public static class CheckMissingReferences
     }
 
     [MenuItem("Tools/Show Missing Object References in all enabled scenes", false, 51)]
-    public static void MissingSpritesInAllScenes()
+    public static void FindMissingReferencesInAllScenes()
     {
         foreach (var scene in EditorBuildSettings.scenes.Where(s => s.enabled))
         {
@@ -48,7 +28,7 @@ public static class CheckMissingReferences
     }
 
     [MenuItem("Tools/Show Missing Object References in assets", false, 52)]
-    public static void MissingSpritesInAssets()
+    public static void FindMissingReferencesInAssets()
     {
         var allAssets = AssetDatabase.GetAllAssetPaths();
         var objs = allAssets.Select(a => AssetDatabase.LoadAssetAtPath(a, typeof(GameObject)) as GameObject).Where(a => a != null).ToArray();
@@ -81,7 +61,7 @@ public static class CheckMissingReferences
                 }
                 var animator = c as Animator;
                 if (animator != null) {
-                    CheckAnimatorReferences (sceneName, animator);
+                    CheckAnimatorReferences(sceneName, animator);
                 }
             }
         }
@@ -121,8 +101,8 @@ public static class CheckMissingReferences
 
             // TODO: something with objectReferenceCurveBindings instead? It would be nice to be able to get the object reference being animated
             // Find when the animation clip would animate an object reference property to a missing object
-            var so = new SerializedObject (ac);
-            var sp = so.GetIterator ();
+            var so = new SerializedObject(ac);
+            var sp = so.GetIterator();
 
             while (sp.NextVisible (true)) {
                 if (sp.propertyType == SerializedPropertyType.ObjectReference) {
@@ -132,11 +112,6 @@ public static class CheckMissingReferences
                 }
             }
         }
-    }
-
-    static void ShowError (string objectName, string propertyName, string sceneName)
-    {
-        Debug.LogError("Missing reference found in: " + objectName + ", Property : " + propertyName + ", Scene: " + sceneName);
     }
 
     static string FullObjectPath(GameObject go)
