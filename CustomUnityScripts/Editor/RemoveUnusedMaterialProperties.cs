@@ -24,6 +24,16 @@ public class RemoveUnusedMaterialProperties : EditorWindow {
             }
         }
 
+        // Integers
+        var intProp = savedProp.FindPropertyRelative("m_Ints");
+        for (int i = intProp.arraySize - 1; i >= 0; i--) {
+            var propertyName = intProp.GetArrayElementAtIndex(i).FindPropertyRelative("first").stringValue;
+            if (!mat.HasInteger(propertyName)) {
+                Debug.Log($"Removing integer property {propertyName}", mat);
+                intProp.DeleteArrayElementAtIndex(i);
+            }
+        }
+
         // Floats
         var floatProp = savedProp.FindPropertyRelative("m_Floats");
         for (int i = floatProp.arraySize - 1; i >= 0; i--) {
@@ -41,16 +51,6 @@ public class RemoveUnusedMaterialProperties : EditorWindow {
             if (!mat.HasColor(propertyName)) {
                 Debug.Log($"Removing color property {propertyName}", mat);
                 colorProp.DeleteArrayElementAtIndex(i);
-            }
-        }
-
-        // Integers
-        var intProp = savedProp.FindPropertyRelative("m_Ints");
-        for (int i = intProp.arraySize - 1; i >= 0; i--) {
-            var propertyName = intProp.GetArrayElementAtIndex(i).FindPropertyRelative("first").stringValue;
-            if (!mat.HasInteger(propertyName)) {
-                Debug.Log($"Removing integer property {propertyName}", mat);
-                intProp.DeleteArrayElementAtIndex(i);
             }
         }
 
