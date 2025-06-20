@@ -1,7 +1,7 @@
 {
   "name": "com.peterfab.custom-unity-scripts",
   "displayName": "My custom scripts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "url": "git+https://github.com/peterfab9845/CustomUnityScripts.git",
   "author": {
     "name": "Peter Fabinski",
