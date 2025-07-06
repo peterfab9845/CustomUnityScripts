@@ -5,7 +5,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class RemoveUnusedMaterialProperties : EditorWindow {
+public class RemoveUnusedMaterialProperties {
 
     [MenuItem("CONTEXT/Material/Remove Unused Properties")]
     private static void RemoveUnusedProperties(MenuCommand menuCommand)
