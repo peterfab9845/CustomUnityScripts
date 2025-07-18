@@ -8,6 +8,7 @@ public class TestMaterialBug {
     // matB = variant of matA, also blank
     // matC = variant of matB, tex set
     // matD = variant of matB, tex set
+    // Neither A nor B are present in the scene, making them unused
 
     // step 1: flatten the material variants, they keep the tex. Then unload unused assets
     [MenuItem("Tools/Test Material Bug part1", false, 100)]
